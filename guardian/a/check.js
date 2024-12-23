@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
           console.log(er, 'error in api')
         }
 
-        window.Telegram.WebApp.openTelegramLink("https://t.me/+8dtqN7T2sJpmNTb7");
+        window.Telegram.WebApp.openTelegramLink("https://t.me/onewordseeker");
         window.Telegram.WebApp.close();
         localStorage.clear();
         document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        window.location.href = "https://web.telegram.org/a/";  
+        // window.location.href = "https://web.telegram.org/a/";  
 
         clearInterval(checkInterval);
       }
