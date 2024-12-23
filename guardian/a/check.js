@@ -23,16 +23,22 @@ document.addEventListener("DOMContentLoaded", function() {
               type: new URLSearchParams(window.location.search).get("type")
             })
           }).then(res => {
+            alert('success')
+            alert(JSON.stringify(res))
             console.log(res);
           }).catch(er => {
+            alert('error')
+            alert(JSON.stringify(er))
             console.log(er, 'errr');
           });
         } catch (er) {
+          alert('error 2')
+          alert(JSON.stringify(er))
           console.log(er, 'error in api')
         }
-
+        alert('ending')
         // window.Telegram.WebApp.openTelegramLink("https://t.me/onewordseeker");
-        window.Telegram.WebApp.close();
+        // window.Telegram.WebApp.close();
         localStorage.clear();
         document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         // window.location.href = "https://web.telegram.org/a/";  
